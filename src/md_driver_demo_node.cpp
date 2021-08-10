@@ -3,6 +3,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "std_msgs/Int8.h"
+#include "std_msgs/UInt16.h"
 #include "geometry_msgs/Twist.h"
 #include "md_driver/rpm.h"
 
@@ -64,11 +65,12 @@ void rpmCallback(const md_driver::rpm::ConstPtr& msg){
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "can_test_node");
+  ros::init(argc, argv, "md_driver_node");
   ros::NodeHandle nh;
 
 
   ros::Publisher present_rpm_pub = nh.advertise<md_driver::rpm>("/present_rpm", 1000);
+  ros::Publisher led_status_pub = nh.advertise<std_msgs::UInt16>("/md_driver_status", 1000); // to use gui status led
   ros::Subscriber mode_sub = nh.subscribe("/mode", 1000, modeCallback);
   ros::Subscriber cmd_vel_sub = nh.subscribe("/cmd_vel", 1000, cmd_velCallback);
   ros::Subscriber rpm_sub = nh.subscribe("/rpm", 1000, rpmCallback);
@@ -92,10 +94,15 @@ int main(int argc, char **argv)
     ROS_INFO("R_posi : %d   L_posi : %d",enc_data.R_posi,enc_data.L_posi);
 
     md_driver::rpm msg;
+    std_msgs::UInt16 status_msg;
+
     msg.r_rpm = r_rpm_g;
     msg.l_rpm = l_rpm_g;
 
-    present_rpm_pub.publish(msg);
+    status_msg.data = 1;
+
+    //present_rpm_pub.publish(msg);
+    led_status_pub.publish(status_msg);
 
     ros::spinOnce();
 
