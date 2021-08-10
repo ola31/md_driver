@@ -2,7 +2,7 @@
 
 
 void MD_driver::initialize_md_driver(void){
-  CAN_initialize(_250k,0xB7AC01,true);  //CAN bit_rate : 250kbps, ID : 0xB7AC01, is_ext_mode : true
+  CAN_initialize(_250k,"can0");  //CAN bit_rate : 250kbps, ID : 0xB7AC01, is_ext_mode : true
 }
 
 void MD_driver::send_RPM(short R_RPM, short L_RPM){
