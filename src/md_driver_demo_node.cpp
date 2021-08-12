@@ -84,14 +84,14 @@ int main(int argc, char **argv)
 
   struct Encoder_data enc_data;
 
-  md.Encoder_REQ();
+  //md.Encoder_REQ();
   loop_rate.sleep();
 
   while (ros::ok())
   {
-    enc_data = md.read_Encoder();
+    //enc_data = md.read_Encoder();
 
-    ROS_INFO("R_posi : %d   L_posi : %d",enc_data.R_posi,enc_data.L_posi);
+    //ROS_INFO("R_posi : %d   L_posi : %d",enc_data.R_posi,enc_data.L_posi);
 
     md_driver::rpm msg;
     std_msgs::UInt16 status_msg;
@@ -106,7 +106,7 @@ int main(int argc, char **argv)
 
     ros::spinOnce();
 
-    md.Encoder_REQ();
+    //md.Encoder_REQ();
     loop_rate.sleep();
   }
 
