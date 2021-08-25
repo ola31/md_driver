@@ -106,7 +106,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES md_driver
-  CATKIN_DEPENDS geometry_msgs roscpp std_msgs #message_runtime message_generation
+  CATKIN_DEPENDS geometry_msgs roscpp std_msgs message_runtime #message_generation
 #  DEPENDS system_lib
 )
 
@@ -146,6 +146,7 @@ include_directories(
 ## Add cmake target dependencies of the executable
 ## same as for the library above
  add_dependencies(${PROJECT_NAME}_demo_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+ add_dependencies(md_driver md_driver_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(${PROJECT_NAME}_demo_node
