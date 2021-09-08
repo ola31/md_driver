@@ -32,9 +32,12 @@ void modeCallback(const std_msgs::Int8::ConstPtr& msg){
  else if(operating_mode == 3){
     //ROS_INFO("Dymanic cmd_vel mode");
  }
-else if(operating_mode == 4){
+ else if(operating_mode == 4){
     //ROS_INFO("Dymanic cmd_vel mode");
  }
+  else if(operating_mode == 5){
+      //ROS_INFO("Dymanic cmd_vel mode");
+   }
   else
     ROS_WARN("Invalid control mode number");
 }
@@ -45,7 +48,7 @@ void cmd_velCallback(const geometry_msgs::Twist::ConstPtr& msg){
   float angular_z = msg->angular.z;
   float vel_arr[2] = {linear_x,angular_z};
 
-  if(operating_mode == 2 || operating_mode==3 || operating_mode==4){
+  if(operating_mode == 2 || operating_mode==3 || operating_mode==4 || operating_mode==5){
      md.contol_vel(vel_arr);
     //ROS_INFO("Linear_x : %f angular_z : %f",linear_x,angular_z);
   }
